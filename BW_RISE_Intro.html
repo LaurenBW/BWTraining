@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BruntWork — The RISE Framework</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 28px 24px 36px;
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .intro {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 680px;
+  }
+
+  /* Pillar buttons grid */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .pillar-btn {
+    border: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 22px 12px 18px;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    background: none;
+  }
+
+  .pillar-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+  }
+
+  .pillar-btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  }
+
+  .pillar-btn .letter {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+  }
+
+  .pillar-btn .label {
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 8px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Pillar colours */
+  .btn-r { background: #E1F5EE; }
+  .btn-r .letter { color: #1A9E93; }
+  .btn-r .label  { color: #04342C; }
+  .btn-r.active  { border-color: #1A9E93; }
+
+  .btn-i { background: #EEEDFE; }
+  .btn-i .letter { color: #534AB7; }
+  .btn-i .label  { color: #26215C; }
+  .btn-i.active  { border-color: #534AB7; }
+
+  .btn-s { background: #FAEEDA; }
+  .btn-s .letter { color: #BA7517; }
+  .btn-s .label  { color: #412402; }
+  .btn-s.active  { border-color: #BA7517; }
+
+  .btn-e { background: #FAE8E8; }
+  .btn-e .letter { color: #C0392B; }
+  .btn-e .label  { color: #4A0F0F; }
+  .btn-e.active  { border-color: #C0392B; }
+
+  /* Detail panel */
+  #detail {
+    border: 1px solid #e8e8e8;
+    border-radius: 14px;
+    background: #f9f9f9;
+    padding: 22px 24px;
+    min-height: 110px;
+    transition: background 0.2s;
+  }
+
+  .placeholder {
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+    padding: 22px 0;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .detail-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .detail-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .detail-pillar-no {
+    font-size: 11px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  .detail-intro {
+    font-size: 13.5px;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .detail-example {
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* Tagline strip */
+  .taglines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .taglines { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .tagline {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<h1>The RISE Framework</h1>
+<p class="intro">
+  Everything you do as a CSM at BruntWork maps back to four pillars. Together they form the <strong>RISE framework</strong> — your guide to moving from reactive task-completion to proactive, strategic client success. Click each pillar below to see what it means and how it shows up in your day-to-day role.
+</p>
+
+<!-- Pillar buttons -->
+<div class="pillars">
+  <button class="pillar-btn btn-r" onclick="show('r')" id="btn-r">
+    <span class="letter">R</span>
+    <span class="label">Relationships</span>
+  </button>
+  <button class="pillar-btn btn-i" onclick="show('i')" id="btn-i">
+    <span class="letter">I</span>
+    <span class="label">Insights</span>
+  </button>
+  <button class="pillar-btn btn-s" onclick="show('s')" id="btn-s">
+    <span class="letter">S</span>
+    <span class="label">Strategy</span>
+  </button>
+  <button class="pillar-btn btn-e" onclick="show('e')" id="btn-e">
+    <span class="letter">E</span>
+    <span class="label">Execution</span>
+  </button>
+</div>
+
+<!-- Detail panel -->
+<div id="detail">
+  <p class="placeholder">Select a pillar above to get started</p>
+</div>
+
+<!-- Tagline strip -->
+<div class="taglines">
+  <div class="tagline">Build trust first</div>
+  <div class="tagline">Read the signals</div>
+  <div class="tagline">Plan ahead</div>
+  <div class="tagline">Deliver every time</div>
+</div>
+
+<script>
+const pillars = {
+  r: {
+    letter: 'R',
+    name: 'Relationships',
+    no: 'Pillar 1 of 4',
+    badgeBg: '#E1F5EE',
+    badgeColor: '#1A9E93',
+    exBg: '#E1F5EE',
+    exColor: '#04342C',
+    intro: 'Relationships are the foundation of everything you do as a CSM. Clients who trust you will tell you what\'s really going on — and that honesty is what lets you do your job well. Building a strong relationship isn\'t just about being friendly; it\'s about being consistent, responsive, and genuinely invested in your client\'s success.',
+    example: '<strong>BruntWork example:</strong> A client who hasn\'t raised any issues in weeks might seem like a low-priority account. But a CSM with a strong relationship will check in anyway — and often discovers the client has been quietly frustrated, or is considering expanding their team. Silence is not the same as satisfaction.'
+  },
+  i: {
+    letter: 'I',
+    name: 'Insights',
+    no: 'Pillar 2 of 4',
+    badgeBg: '#EEEDFE',
+    badgeColor: '#534AB7',
+    exBg: '#EEEDFE',
+    exColor: '#26215C',
+    intro: 'Insights are about knowing what\'s really happening across your accounts — not just what clients tell you, but what the data shows. As a CSM you have access to call recordings, invoice history, staff attendance, and client engagement patterns. Learning to read these signals is what separates a reactive CSM from a proactive one.',
+    example: '<strong>BruntWork example:</strong> You notice in your weekly Finance report that a client has two overdue invoices for the first time. Rather than waiting for Collections to chase them, you check your last Gong call transcript — the client mentioned a quiet period in their business. You reach out proactively with a supportive tone, and the relationship stays intact.'
+  },
+  s: {
+    letter: 'S',
+    name: 'Strategy',
+    no: 'Pillar 3 of 4',
+    badgeBg: '#FAEEDA',
+    badgeColor: '#BA7517',
+    exBg: '#FAEEDA',
+    exColor: '#412402',
+    intro: 'Strategy means thinking ahead for your clients — not just managing what\'s in front of you today. A strategic CSM understands each client\'s business well enough to anticipate their needs, identify growth opportunities, and plan for renewals long before they come up. This is what makes you a genuine business partner rather than just a point of contact.',
+    example: '<strong>BruntWork example:</strong> During a 60-day check-in, your client mentions they\'re expanding into a new market next quarter. A reactive CSM files that as an interesting update. A strategic CSM immediately thinks: that\'s a staffing conversation — what roles will they need, what\'s the timeline, and who do I loop in from Recruitment?'
+  },
+  e: {
+    letter: 'E',
+    name: 'Execution',
+    no: 'Pillar 4 of 4',
+    badgeBg: '#FAE8E8',
+    badgeColor: '#C0392B',
+    exBg: '#FAE8E8',
+    exColor: '#4A0F0F',
+    intro: 'Execution is where your relationships, insights, and strategy become real. It\'s the quality and consistency of everything you actually deliver — your onboarding calls, your follow-up emails, your invoice conversations, your staffing requests. Good execution isn\'t just about completing tasks; it\'s about completing the right tasks, in the right order, to a standard your clients can rely on.',
+    example: '<strong>BruntWork example:</strong> After every client onboarding call, you send a summary email within 24 hours — including a link to the Gong recording and a PDF of the onboarding deck. The client didn\'t ask for this. But receiving it builds immediate confidence that they\'re in capable hands, and sets the tone for the entire relationship.'
+  }
+};
+
+const keys = ['r','i','s','e'];
+
+function show(key) {
+  const p = pillars[key];
+  if (!p) return;
+
+  // Reset all buttons
+  keys.forEach(k => {
+    document.getElementById('btn-' + k).classList.remove('active');
+  });
+
+  // Activate selected
+  document.getElementById('btn-' + key).classList.add('active');
+
+  // Render detail
+  document.getElementById('detail').innerHTML = `
+    <div class="detail-header">
+      <div class="detail-badge" style="background:${p.badgeBg};color:${p.badgeColor}">${p.letter}</div>
+      <div>
+        <div class="detail-title">${p.name}</div>
+        <div class="detail-pillar-no">${p.no}</div>
+      </div>
+    </div>
+    <p class="detail-intro">${p.intro}</p>
+    <div class="detail-example" style="background:${p.exBg};color:${p.exColor}">${p.example}</div>
+  `;
+}
+</script>
+</body>
+</html>
