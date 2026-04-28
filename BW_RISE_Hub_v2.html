@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BruntWork — The RISE Framework</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #ffffff; color: #1a1a1a;
+    padding: 24px 20px 48px; max-width: 880px; margin: 0 auto;
+    font-size: 14px; line-height: 1.5;
+  }
+
+  /* ── Header ── */
+  .page-label { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:#2DC4B2;margin-bottom:6px; }
+  .page-title { font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:8px; }
+  .page-intro { font-size:13.5px;color:#555;line-height:1.7;margin-bottom:18px;max-width:720px; }
+
+  /* ── Mindset banner ── */
+  .mindset-bar { background:#1A1A1A;border-radius:10px;padding:14px 20px;margin-bottom:22px;display:flex;align-items:flex-start;gap:14px; }
+  .mindset-bar .m-label { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2DC4B2;white-space:nowrap;margin-top:2px; }
+  .mindset-bar .m-text { font-size:13px;color:#ffffff;line-height:1.6; }
+  .mindset-bar .m-text strong { color:#2DC4B2; }
+
+  /* ── Tabs ── */
+  .tabs { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px; }
+  @media(max-width:520px){ .tabs{grid-template-columns:repeat(2,1fr);} }
+  .tab-btn { border:2px solid transparent;cursor:pointer;border-radius:12px;padding:18px 10px 14px;text-align:center;transition:transform .15s,box-shadow .15s,border-color .15s;background:none; }
+  .tab-btn:hover { transform:scale(1.03);box-shadow:0 4px 14px rgba(0,0,0,.09); }
+  .tab-btn.active { transform:scale(1.05);box-shadow:0 5px 18px rgba(0,0,0,.12); }
+  .tab-letter { font-size:32px;font-weight:700;line-height:1;display:block; }
+  .tab-name   { font-size:10px;font-weight:700;margin-top:7px;display:block;text-transform:uppercase;letter-spacing:.06em; }
+  .tab-tag    { font-size:10px;font-style:italic;margin-top:3px;display:block;opacity:.75; }
+  .btn-r{background:#E1F5EE;} .btn-r .tab-letter{color:#1A9E93;} .btn-r .tab-name{color:#04342C;} .btn-r .tab-tag{color:#1A9E93;} .btn-r.active{border-color:#1A9E93;}
+  .btn-i{background:#EEEDFE;} .btn-i .tab-letter{color:#534AB7;} .btn-i .tab-name{color:#26215C;} .btn-i .tab-tag{color:#534AB7;} .btn-i.active{border-color:#534AB7;}
+  .btn-s{background:#FAEEDA;} .btn-s .tab-letter{color:#BA7517;} .btn-s .tab-name{color:#412402;} .btn-s .tab-tag{color:#BA7517;} .btn-s.active{border-color:#BA7517;}
+  .btn-e{background:#FAE8E8;} .btn-e .tab-letter{color:#C0392B;} .btn-e .tab-name{color:#4A0F0F;} .btn-e .tab-tag{color:#C0392B;} .btn-e.active{border-color:#C0392B;}
+
+  /* ── Panel ── */
+  #panel { border:1px solid #e8e8e8;border-radius:14px;background:#fff;padding:24px;min-height:200px;margin-bottom:20px; }
+  .placeholder { text-align:center;color:#bbb;font-size:14px;padding:30px 0; }
+
+  /* Detail inner */
+  .d-header { display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #f0f0f0; }
+  .d-badge { width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:26px;font-weight:700; }
+  .d-title   { font-size:19px;font-weight:700;color:#1a1a1a; }
+  .d-num     { font-size:11px;color:#bbb;text-transform:uppercase;letter-spacing:.06em;margin-top:3px; }
+  .d-tagline { font-size:12px;font-style:italic;margin-top:2px; }
+
+  /* Section blocks */
+  .s-block { margin-bottom:18px; }
+  .s-block:last-child { margin-bottom:0; }
+  .s-label { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px; }
+  .s-body  { font-size:13.5px;color:#333;line-height:1.72; }
+  .s-body ul { padding-left:18px; }
+  .s-body li { margin-bottom:8px; }
+  .s-body strong { color:#1a1a1a; }
+
+  /* Tinted blocks */
+  .tinted   { padding:14px 18px;border-radius:10px; }
+  .left-bar { padding:14px 18px;border-radius:0 10px 10px 0;background:#fafafa; }
+  .note-box { margin-top:0;padding:12px 16px;border-radius:0 10px 10px 0;background:#FFF8E6;border-left:3px solid #E8C84A; }
+  .note-box .s-body { color:#5C4800; }
+  .connects-box { padding:14px 18px;border-radius:10px;background:#f4f4f4; }
+  .bw-box { padding:14px 18px;border-radius:10px;border-left:3px solid #2DC4B2;background:#f0fdfa; }
+  .bw-box .s-body { color:#04342C; }
+
+  /* Persona grid */
+  .persona-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px; }
+  @media(max-width:520px){ .persona-grid{grid-template-columns:1fr;} }
+  .persona-card { padding:12px;border-radius:10px;border:1px solid #e8e8e8; }
+  .persona-title { font-size:12px;font-weight:700;margin-bottom:5px; }
+  .persona-body  { font-size:12px;color:#555;line-height:1.55; }
+
+  /* Signal grid */
+  .signal-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px; }
+  @media(max-width:560px){ .signal-grid{grid-template-columns:1fr;} }
+  .signal-card { padding:12px;border-radius:10px;border:1px solid #e8e8e8; }
+  .signal-title { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px; }
+  .signal-body  { font-size:12px;color:#555;line-height:1.55; }
+
+  /* Workflow list */
+  .workflow-item { padding:12px 16px;border-radius:8px;border:1px solid #e8e8e8;margin-bottom:8px; }
+  .workflow-name { font-size:13px;font-weight:700;margin-bottom:4px; }
+  .workflow-break { font-size:12px;color:#555;line-height:1.55; }
+  .workflow-bw   { font-size:12px;color:#1A9E93;margin-top:4px;font-style:italic; }
+
+  /* ── How they connect ── */
+  .connect-section { background:#f8f8f8;border:1px solid #e8e8e8;border-radius:14px;padding:20px 22px; }
+  .connect-label { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin-bottom:12px; }
+  .connect-flow { display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:6px;margin-bottom:14px; }
+  @media(max-width:520px){ .connect-flow{grid-template-columns:1fr 1fr;gap:8px;} .connect-arrow{display:none;} }
+  .connect-pill { text-align:center;padding:10px 6px;border-radius:10px; }
+  .connect-pill .cp-l { font-size:16px;font-weight:700; }
+  .connect-pill .cp-t { font-size:10px;margin-top:3px; }
+  .connect-arrow { color:#ccc;font-size:18px;text-align:center; }
+  .connect-body  { font-size:13px;color:#555;line-height:1.68; }
+</style>
+</head>
+<body>
+
+<div class="page-label">BruntWork · Client Success Training</div>
+<h1 class="page-title">The RISE Framework</h1>
+<p class="page-intro">RISE is BruntWork's framework for Client Success — your compass for moving from reactive task-completion to proactive, strategic partnership with every client. Everything you learn maps back to one of these four pillars. Click each one to explore it fully.</p>
+
+<div class="mindset-bar">
+  <div class="m-label">Core mindset</div>
+  <div class="m-text"><strong>Value-first engagement:</strong> Before every interaction, the question is not "what do I need from this client?" It's "what does this client need from me?" That shift in perspective is what the entire RISE framework is built on — and it's the hardest habit to build and the easiest to lose.</div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn btn-r" onclick="show('r')" id="tab-r">
+    <span class="tab-letter">R</span>
+    <span class="tab-name">Relationships</span>
+    <span class="tab-tag">Trust opens doors</span>
+  </button>
+  <button class="tab-btn btn-i" onclick="show('i')" id="tab-i">
+    <span class="tab-letter">I</span>
+    <span class="tab-name">Insights</span>
+    <span class="tab-tag">Be nosy. It's your business.</span>
+  </button>
+  <button class="tab-btn btn-s" onclick="show('s')" id="tab-s">
+    <span class="tab-letter">S</span>
+    <span class="tab-name">Strategy</span>
+    <span class="tab-tag">Your game plan</span>
+  </button>
+  <button class="tab-btn btn-e" onclick="show('e')" id="tab-e">
+    <span class="tab-letter">E</span>
+    <span class="tab-name">Execution</span>
+    <span class="tab-tag">Do it. Review it. Adapt it.</span>
+  </button>
+</div>
+
+<div id="panel">
+  <p class="placeholder">Select a pillar above to get started</p>
+</div>
+
+<div class="connect-section">
+  <div class="connect-label">How the four pillars connect — a cycle, not a checklist</div>
+  <div class="connect-flow">
+    <div class="connect-pill" style="background:#E1F5EE"><div class="cp-l" style="color:#1A9E93">R</div><div class="cp-t" style="color:#04342C">Trust opens doors</div></div>
+    <div class="connect-arrow">→</div>
+    <div class="connect-pill" style="background:#EEEDFE"><div class="cp-l" style="color:#534AB7">I</div><div class="cp-t" style="color:#26215C">Data guides focus</div></div>
+    <div class="connect-arrow">→</div>
+    <div class="connect-pill" style="background:#FAEEDA"><div class="cp-l" style="color:#BA7517">S</div><div class="cp-t" style="color:#412402">Plans drive action</div></div>
+    <div class="connect-arrow">→</div>
+    <div class="connect-pill" style="background:#FAE8E8"><div class="cp-l" style="color:#C0392B">E</div><div class="cp-t" style="color:#4A0F0F">Delivery builds trust</div></div>
+  </div>
+  <p class="connect-body">Strong relationships give clients the trust to share what's really happening. Honest information powers better strategy. Better strategy makes execution more impactful. And consistent execution deepens trust — raising the whole cycle to a higher level with every pass. You can also apply RISE to any individual activity: a QBR, a check-in call, even a single email. Ask: who are my relationships here? What insights do I have? What's my strategy? How will I execute and measure it?</p>
+</div>
+
+<script>
+const P = {
+
+  // ════════════════════════════════════════════════════════════════════
+  // R — RELATIONSHIPS
+  // ════════════════════════════════════════════════════════════════════
+  r: {
+    color:'#1A9E93', bg:'#E1F5EE', tc:'#04342C',
+    name:'Relationships', num:'Pillar 1 of 4',
+    tagline:'"Value-first engagement — what\'s in it for them, not you."',
+    def:'Relationships are the foundation of everything you do as a CSM. Without trust, you\'re working blind. Clients who trust you will tell you what\'s really going on — their real frustrations, their actual plans, their genuine concerns. With trust, every other pillar becomes easier. Without it, even perfect execution falls flat.',
+    why:'At BruntWork, this pillar carries more weight than in most CS roles. <strong>Your clients cannot see their staff day to day.</strong> They cannot walk to someone\'s desk, observe performance, or sit in on a team meeting. They are paying for people they cannot directly supervise — and trusting BruntWork to ensure those people are performing. <strong>You are the visible proof that BruntWork is looking after their investment. Your relationship with the client IS the service they experience.</strong>',
+    sections:[
+      { label:'The three levels of client relationship', body:`
+        Most CSMs operate at Level 1 without realising it.<br><br>
+        <strong>Level 1 — Transactional:</strong> They contact you when something breaks. You react. That's it. The client tolerates you. They don't trust you with real information.<br><br>
+        <strong>Level 2 — Proactive:</strong> You check in before they need to reach out. They feel looked after. They start to share more.<br><br>
+        <strong>Level 3 — Strategic partner:</strong> They ask your opinion. They refer others. Churn risk is near zero — not because of the contract, but because of the relationship. <em>This is your target for every account.</em>
+      `},
+      { label:'Two types of relationships to manage', body:`
+        <strong>Internal stakeholders</strong> are your colleagues — Sales, Staff Services, Recruitment, Finance, IT. These are your clients too. When Sales gives a poor handover, when Staff Services isn't kept in the loop, when there's misalignment between departments — <em>your client feels it</em>. Customer success is a company mindset, not just a department.<br><br>
+        <strong>External stakeholders</strong> are the people at your client's organisation. They are not one person.
+      `},
+      { label:'The three client personas', body:`
+        <div class="persona-grid">
+          <div class="persona-card" style="border-top:3px solid #1A9E93">
+            <div class="persona-title" style="color:#1A9E93">The Buyer</div>
+            <div class="persona-body">Cares about money, ROI, cost-effectiveness. <em>Never</em> talk features. Talk value, financial impact, and board-level outcomes. Show the receipts.</div>
+          </div>
+          <div class="persona-card" style="border-top:3px solid #534AB7">
+            <div class="persona-title" style="color:#534AB7">The Decider</div>
+            <div class="persona-body">Executive sponsors and influential leaders. They want strategic advantages, competitive differentiation, long-term benefits. Connect to their vision, not their inbox.</div>
+          </div>
+          <div class="persona-card" style="border-top:3px solid #BA7517">
+            <div class="persona-title" style="color:#BA7517">The User</div>
+            <div class="persona-body">The people in the tool or managing the staff every day. They care about features, training, practical support. Give them enablement and a strong feedback loop.</div>
+          </div>
+        </div>
+      `},
+      { label:'What building trust actually looks like', body:`<ul>
+        <li><strong>Show up consistently — even when nothing is wrong.</strong> Silence from your side signals neglect. Your quietest accounts need attention, not permission to be ignored.</li>
+        <li><strong>Do your research before every interaction.</strong> LinkedIn, Gong recordings, company news, industry reports. Come to every interaction with something valuable — not just a list of questions to ask.</li>
+        <li><strong>Know yourself first.</strong> Before you can build great relationships, you need a clear value-add introduction — what you do, what you don't do, and how you're different from Sales and Support. If your client doesn't know why you exist, you've already lost ground.</li>
+        <li><strong>Send a monthly alignment email.</strong> Don't assume your stakeholders are talking to each other. A short monthly recap — here's what happened, here's what's next, here's what I need — prevents more misalignment and quiet churn than almost anything else.</li>
+        <li><strong>Ask different questions of each persona.</strong> Buyers want to talk about money. Deciders want to talk about strategy. Users want to talk about tools. Speak their language, not yours.</li>
+      </ul>`},
+    ],
+    example:'<strong>The quiet client trap — the most important scenario in this pillar.</strong> A client goes quiet for two weeks. No complaints, no requests. A reactive CSM relaxes. An experienced one checks in. That check-in reveals the client has been frustrated with a staff member\'s performance but didn\'t know who to raise it with — and has started quietly researching alternatives. The proactive call saves the account. The silence was not satisfaction. It was the first stage of churn. <em>At BruntWork, where clients cannot see their staff day-to-day, the quiet client is your highest-risk account profile. No news is never good news.</em>',
+    watchout:'<strong>The quiet client trap.</strong> A client who stops reaching out is almost always one who has started looking for alternatives. The clients who churn without warning are the ones who went quiet first. Reframe silence as a signal — not a green light.',
+    next:'Once you have trust, clients open up about what\'s really happening. That honest information is what the <strong>Insights</strong> pillar turns into action.'
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // I — INSIGHTS
+  // ════════════════════════════════════════════════════════════════════
+  i: {
+    color:'#534AB7', bg:'#EEEDFE', tc:'#26215C',
+    name:'Insights', num:'Pillar 2 of 4',
+    tagline:'"Be nosy. Everything about your client is your business."',
+    def:'Insights are what you do with the information available to you. As a CSM, you\'re not short of data — call recordings in Gong, invoice history in Xero, staff attendance in FastDTR, client engagement in HubSpot, public company news, industry reports. The skill is knowing what signal types to look for, what they mean, and when to act.',
+    why:'With 60+ accounts, you cannot give every client equal attention every day. <strong>Insights are how you prioritise.</strong> They tell you which accounts need your focus right now, which are quietly at risk, and where a growth conversation might be waiting. A CSM without insights is always reacting. A CSM with insights is always one step ahead — and that difference is what separates good from great at BruntWork.',
+    sections:[
+      { label:'Three types of signals to read — every account, every week', body:`
+        <div class="signal-grid">
+          <div class="signal-card" style="border-top:3px solid #1A9E93">
+            <div class="signal-title" style="color:#1A9E93">Health signals</div>
+            <div class="signal-body">Is this account stable? Staff attendance consistent in FastDTR? Invoices current in Xero? Portal logins growing? Check-in tone positive? A healthy account still needs attention — health erodes quietly.</div>
+          </div>
+          <div class="signal-card" style="border-top:3px solid #C0392B">
+            <div class="signal-title" style="color:#C0392B">Churn signals</div>
+            <div class="signal-body">Slow replies. Missed check-ins. Calls cut short. The same complaint raised twice. Overdue invoices. Short, flat responses where there used to be warmth. None of these alone means churn — but a pattern means act now.</div>
+          </div>
+          <div class="signal-card" style="border-top:3px solid #BA7517">
+            <div class="signal-title" style="color:#BA7517">Growth signals</div>
+            <div class="signal-body">Client mentions new markets or expansion. Staff workload rising. Part-time client consistently engaged. "Do you have anyone who can also do X?" A trusted relationship with a well-networked client. These are opportunities waiting to be activated.</div>
+          </div>
+        </div>
+      `},
+      { label:'Where insights come from — direct and indirect', body:`
+        <strong>Direct insights</strong> — from your client:<br>
+        <ul style="margin-top:8px">
+          <li><strong>Strategic conversations</strong> — the most important source. Discussions about goals, challenges, and priorities. Not features or support tickets — those are tactical. Strategic conversations are where you build trust and gather intelligence simultaneously.</li>
+          <li><strong>Product usage data</strong> — FastDTR attendance patterns, portal login frequency, HubSpot engagement. Numbers that reveal behaviour before words do.</li>
+          <li><strong>Gong call transcripts</strong> — go back and read them. Not for notes. For tone shifts, repeated concerns, and the questions a client hesitated to ask.</li>
+          <li><strong>Xero invoice patterns</strong> — an overdue invoice is data. It may signal financial stress before the client tells you. Check it before Collections does.</li>
+        </ul>
+        <br><strong>Indirect insights</strong> — from the world around your client:<br>
+        <ul style="margin-top:8px">
+          <li><strong>Customer stories</strong> — "A client in your same industry solved this by..." builds credibility without naming names. Build a personal repository sorted by industry and challenge.</li>
+          <li><strong>Industry trends and benchmarks</strong> — your client may not know their own industry benchmarks. You bringing that information positions you as an expert in their space.</li>
+          <li><strong>Public company data</strong> — earnings calls, LinkedIn activity, and company news. Free intelligence that\'s almost never used.</li>
+        </ul>
+      `},
+      { label:'The voiceless CSM problem — and how to fix it', body:`
+        Over-relying on slides kills strategic conversation. When you\'re reading from a deck, you\'re not listening. When you\'re not listening, you\'re missing signals.<br><br>
+        <strong>The fix:</strong> make your agendas fluid. Slides support you — they are not the main character. You are. If there\'s an elephant in the room, address it before your slide deck. And when you do use data, apply the <strong>"so what?" test</strong> before sharing any data point: what does this mean and why does it matter to this client right now? If you can\'t answer that clearly, the data point doesn\'t belong in the conversation.
+      `},
+      { label:'What it looks like in practice', body:`<ul>
+        <li><strong>Review Gong transcripts after every call</strong> — not for notes, but for tone shifts, repeated concerns, and the questions the client hesitated to ask.</li>
+        <li><strong>Check Finance reports before Collections does.</strong> If a client has an overdue invoice, you should already know about it before anyone calls you.</li>
+        <li><strong>Monitor FastDTR attendance patterns.</strong> A staff member logging in late three times in two weeks is a proactive conversation — not a reactive complaint after the client raises it.</li>
+        <li><strong>Use the quartile system as an insight tool, not just a label.</strong> A Q3 client with growing headcount and responsive communication is a Q2 candidate. A Q1 client with payment delays and shortening calls is a retention risk. The quartile tells you the classification. Your insights tell you the direction of travel.</li>
+        <li><strong>Frame data as a story, not a dump.</strong> Beginning: where we were. Middle: what happened and why. End: what it means and what\'s next. Always end on a takeaway or action.</li>
+      </ul>`},
+    ],
+    example:'A staff member has logged in late three times in two weeks. The client hasn\'t mentioned it yet. A CSM who reads FastDTR spots this, raises it proactively with Staff Services, and gives the client a heads-up framed as "I noticed this and wanted to keep you informed." That proactive call turns a potential complaint into a demonstration of care. That\'s insights converting into trust — and trust converting back into the Relationships pillar.',
+    watchout:'<strong>Insights without action is just awareness.</strong> Noticing a signal and filing it mentally is not the same as acting on it. The insight only has value when it drives a decision, a conversation, or a change in approach.',
+    next:'Once you understand what\'s really happening across your accounts, you can start planning intelligently. Knowing where each account stands is the foundation for <strong>Strategy</strong>.'
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // S — STRATEGY
+  // ════════════════════════════════════════════════════════════════════
+  s: {
+    color:'#BA7517', bg:'#FAEEDA', tc:'#412402',
+    name:'Strategy', num:'Pillar 3 of 4',
+    tagline:'"Your game plan — at book of business level AND account level."',
+    def:'Strategy is your game plan. Not just doing QBRs and monthly calls — that\'s a schedule, not a strategy. Real strategy means thinking about your clients\' goals and your goals for each account, planning past what\'s happening today, anticipating change, and planting seeds for opportunities before they become obvious. It operates at two levels: your whole book of business, and each individual account.',
+    why:'A reactive CSM is always behind — responding to what\'s already happened. <strong>A strategic CSM is always one step ahead — and clients feel that difference.</strong> Strategic CSMs retain more accounts, identify more growth opportunities, and are rarely blindsided by churn because they\'ve been building the case for renewal since Day 1.',
+    sections:[
+      { label:'Start here: where is your time actually going?', body:`
+        Before any strategy can work, you need to know where your time goes. If over 50% of your week is reactive — support escalations, ad-hoc requests, firefighting — there is no space for strategic work. Strategy doesn\'t compete with firefighting. It loses. Every time.<br><br>
+        <strong>Do a time audit.</strong> List every activity in your role. Separate reactive (someone else triggered it) from proactive (you initiated it with a goal). Then ask: which reactive activities can be reduced, delegated, or redirected? Fixing that first is itself a strategic decision.
+      `},
+      { label:'The quartile system as a prioritisation tool — not just a label', body:`
+        The quartile system tells you where an account currently sits. Your insights tell you where it\'s heading. <strong>The combination is how you triage your book of business.</strong><br><br>
+        <ul style="margin-top:8px">
+          <li>A Q3/Q4 client with growing headcount, rising portal usage, and responsive communication is a potential Q2 candidate — <em>this is an expansion conversation.</em></li>
+          <li>A Q1/Q2 client with payment delays, shortening calls, and flat responses is a retention risk — <em>this is an escalation conversation.</em></li>
+          <li>A Q3/Q4 client who goes quiet is not a low priority — they\'re potentially your next churn.</li>
+        </ul>
+        A CSM managing 60 accounts without a triage method will default to spending time on the loudest clients — which is almost never the right call.
+      `},
+      { label:'Growth conversation planning — the most commercially valuable skill', body:`
+        The single most commercially valuable thing a BruntWork CSM can do is have a natural expansion conversation — one that doesn\'t feel like a sales pitch because it\'s genuinely grounded in the client\'s situation.<br><br>
+        <strong>Growth signals to activate (not just note):</strong><br>
+        <ul style="margin-top:8px">
+          <li>Client mentions expanding into a new market → staffing conversation. What roles? What timeline? Who do I loop in from Recruitment?</li>
+          <li>Staff workload consistently rising → capacity conversation. Is the current team sufficient?</li>
+          <li><strong>Part-time client, consistently engaged</strong> → full-time conversion conversation. This is your single biggest FTE opportunity. A part-time account converting to full-time nearly doubles its value. Know when to raise it, how to frame it as being in their interest ("many clients find full-time makes more commercial sense once the team is settled"), and what objections to expect.</li>
+          <li>Client asks "do you have anyone who can also do X?" → new role conversation. A casual question is often a staffing request in disguise.</li>
+          <li>Strong relationship, consistently satisfied client → referral conversation. A trusted client who refers a peer is the highest-value lead BruntWork can get.</li>
+        </ul>
+      `},
+      { label:'RISE applied to each account', body:`
+        For every account you manage, the RISE framework gives you four questions:<br>
+        <ul style="margin-top:8px">
+          <li><strong>R:</strong> Who are my stakeholders? Do they know my value? What\'s my relationship quality with each persona?</li>
+          <li><strong>I:</strong> What do I know about this account? What signals am I watching? What am I missing?</li>
+          <li><strong>S:</strong> What is my account plan? What are my goals — and theirs — for the next 30/60/90 days?</li>
+          <li><strong>E:</strong> How do I execute the plan? What does success look like? How will I adapt if it\'s not working?</li>
+        </ul>
+        The discipline of answering these four questions for your strategic accounts is what separates a reactive book of business from a strategic one.
+      `},
+    ],
+    example:'During a 60-day check-in, a client mentions offhand that they\'re expanding into a new market next quarter. A reactive CSM notes it. A strategic CSM immediately connects it to a staffing opportunity — what roles will they need, what\'s the timeline, who do I loop in from Recruitment? That one question, asked at the right moment, opens an expansion conversation that could significantly grow the account. <em>The same conversation happens in front of every CSM. Only the strategic one acts on it.</em>',
+    watchout:'<strong>Strategy without execution stays theoretical. Strategy without insights is just guessing.</strong> The most thoughtful account plan means nothing if it\'s never delivered — or if it\'s built on assumptions rather than data from your client. Strategy sets the direction. Insights fuel it. Execution makes it real.',
+    next:'Once you know what you want to achieve and have a plan to get there, it\'s time to deliver it — consistently and to a standard your clients can rely on. That\'s where <strong>Execution</strong> takes over.'
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // E — EXECUTION
+  // ════════════════════════════════════════════════════════════════════
+  e: {
+    color:'#C0392B', bg:'#FAE8E8', tc:'#4A0F0F',
+    name:'Execution', num:'Pillar 4 of 4',
+    tagline:'"Do it. Review it. Adapt it."',
+    def:'Execution is the engine. It\'s where relationships, insights, and strategy become real action. But great execution isn\'t just completing tasks — it\'s completing the right tasks, in the right order, framed in the right way, measured against the right outcomes. Three components: <strong>Do it. Review it. Adapt it.</strong>',
+    why:'Clients judge BruntWork almost entirely by what they experience — and what they experience is shaped almost entirely by you. <strong>Every interaction either builds confidence or erodes it.</strong> But here\'s the critical warning: execution without the other three pillars produces technically correct work that feels hollow. A perfectly formatted onboarding summary sent to a client who doesn\'t trust you, about an account you haven\'t been tracking, in service of no strategic goal — lands very differently from the same action taken by a CSM who has built R, I, and S first.',
+    sections:[
+      { label:'The six BruntWork execution workflows — and where each one breaks', body:`
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">1. Client onboarding</div>
+          <div class="workflow-break">The deck and process are clear. <strong>Where it breaks:</strong> the moments the deck doesn\'t cover — an unexpected question, a distracted client, a pricing query the CSM can\'t answer. Execution under surprise is a different skill from execution in a clean run-through.</div>
+          <div class="workflow-bw">Before touching the deck, ask: what does this client need to feel by the end of this call? That question makes every slide purposeful rather than procedural.</div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">2. Regular check-ins</div>
+          <div class="workflow-break">Templates for 30/60/90 day touchpoints exist. <strong>Where it breaks:</strong> knowing what to do with what you learn. A client who says "everything\'s fine" may be satisfied — or may not trust you enough to say what\'s wrong. A CSM only executing takes "fine" at face value. One also doing Insights work probes.</div>
+          <div class="workflow-bw">Before every call: what do I want this client to feel, decide, or do differently by the end of this conversation? If you can\'t answer that, you\'re not being strategic — you\'re just checking in.</div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">3. Staffing requests</div>
+          <div class="workflow-break">The coordination process with Recruitment and Sales Admin is clear. <strong>Where it breaks:</strong> the training frames staffing requests as reactive events — the client asks, the CSM coordinates. It never teaches CSMs to initiate staffing conversations proactively — which is where the real commercial value is.</div>
+          <div class="workflow-bw">For existing clients, YOU are the job owner. Use growth signals from Insights to get ahead of requests before the client makes them.</div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">4. Financial follow-up</div>
+          <div class="workflow-break">The Collections process is clear. <strong>Where it breaks:</strong> the interpersonal reality of the conversation. Chasing an overdue invoice from a client you have a strong relationship with is uncomfortable but manageable. Doing the same with a client who barely knows you is adversarial.</div>
+          <div class="workflow-bw">You are the client-facing arm of Collections. Finance handles the numbers — you have the conversation. The strength of that conversation depends entirely on the Relationships pillar underneath it.</div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">5. Annual 5% salary increase</div>
+          <div class="workflow-break">The process is straightforward: notify the client one month ahead, confirm in writing, update Finance. <strong>Where it breaks:</strong> when clients push back. "We didn\'t budget for that." "Our staff hasn\'t performed well enough." "Can we skip it this year?" A CSM who only knows the execution steps has no tools for this conversation.</div>
+          <div class="workflow-bw">Know why this clause exists, what it means for staff retention, and how to frame it as being in the client\'s interest. Clients who trust you accept this without negotiation. Clients who don\'t, challenge it.</div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-name" style="color:#C0392B">6. Retention and churn prevention</div>
+          <div class="workflow-break">This is where all four pillars come together or fall apart simultaneously. <strong>Where it breaks:</strong> knowing when to escalate requires Insights. Having the recovery conversation requires Relationships. Knowing what to offer as a resolution requires Strategy. Good execution of the escalation process alone is not enough.</div>
+          <div class="workflow-bw">Escalation path: You → CSM Team Lead → Head of CS → CRO → CEO. Always go to your TL first. Early escalation when you have a relationship signal is always better than late escalation after the client has already decided.</div>
+        </div>
+      `},
+      { label:'Four communication structures — choose the right one', body:`
+        <strong>Before / During / After</strong> — chronological. Best for QBRs and review calls. Where were they? Where are they now? Where are we going next?<br><br>
+        <strong>Challenge / Opportunity / Actions</strong> — best when presenting a solution to a problem. Here\'s the challenge, here\'s the opportunity inside it, here\'s exactly what we do next.<br><br>
+        <strong>Picture / Promise / Proof / Push</strong> — best for introducing something new: a feature, an upsell, an expansion conversation. Paint the picture, make the promise, back it with proof, then make the ask.<br><br>
+        <strong>Feature / Advantage / Benefit</strong> — for when you need to talk about product without losing the client in technical detail. Name the feature, explain its advantage, land on the direct benefit. Always end on the benefit.
+      `},
+      { label:'Tracking and adapting', body:`<ul>
+        <li><strong>Define what success looks like before you start</strong> — not after. Success can be as small as "they opened the email" or as large as "adoption up 20% over two months." Define it upfront or you can\'t review it.</li>
+        <li><strong>Use the right tool for what you\'re measuring.</strong> MixMax for email opens. Gong for call follow-up. FastDTR for attendance. Xero for invoice status. HubSpot for pipeline and engagement.</li>
+        <li><strong>Build reviews into your calendar</strong> — not your good intentions. If it\'s not scheduled, it won\'t happen.</li>
+        <li><strong>Know when to change approach.</strong> If you\'ve sent four value-first emails and heard nothing back — that\'s data. Change the framing, try a different stakeholder, try a different channel. Don\'t keep doing the same thing.</li>
+      </ul>`},
+    ],
+    example:'A client\'s first invoice comes due and they\'ve missed it. A CSM who has spent 30 days building a genuine relationship doesn\'t make an awkward, transactional call. They open with warmth, reference something from their last conversation, and handle the invoice as one part of a broader check-in. The client pays without friction and the relationship stays intact. <em>That\'s what execution looks like when R, I, and S are already doing their job.</em>',
+    watchout:'<strong>Execution without R, I, and S is the most common failure mode in CSM roles.</strong> The current BruntWork training spends roughly 80% of its time on execution content — tools, processes, the onboarding deck. That\'s not wrong, but it\'s unbalanced when the other three pillars barely get a session between them. You end up with CSMs who can run an onboarding call but can\'t read whether it actually went well.',
+    next:'Consistent, high-quality execution deepens the trust your clients have in you — which strengthens the relationship, which opens up better insights, which powers smarter strategy. <strong>RISE is a cycle. Every time you complete it, the relationship moves to a higher level.</strong>'
+  }
+};
+
+const keys = ['r','i','s','e'];
+
+function label(text, color){ return `<div class="s-label" style="color:${color}">${text}</div>`; }
+
+function show(key){
+  const p = P[key]; if(!p) return;
+  keys.forEach(k => {
+    document.getElementById('tab-'+k).classList.toggle('active', k===key);
+  });
+
+  const sections = p.sections.map(s=>`
+    <div class="s-block">
+      ${label(s.label, p.color)}
+      <div class="s-body">${s.body}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('panel').innerHTML = `
+    <div class="d-header">
+      <div class="d-badge" style="background:${p.bg};color:${p.color}">${key.toUpperCase()}</div>
+      <div>
+        <div class="d-title">${p.name}</div>
+        <div class="d-num">${p.num}</div>
+        <div class="d-tagline" style="color:${p.color}">${p.tagline}</div>
+      </div>
+    </div>
+
+    <div class="s-block">
+      ${label('What it is', p.color)}
+      <div class="s-body">${p.def}</div>
+    </div>
+
+    <div class="s-block">
+      <div class="tinted" style="background:${p.bg}">
+        ${label('Why it matters at BruntWork', p.color)}
+        <div class="s-body" style="color:${p.tc}">${p.why}</div>
+      </div>
+    </div>
+
+    ${sections}
+
+    <div class="s-block">
+      <div class="left-bar" style="border-left:3px solid ${p.color}">
+        ${label('BruntWork example', p.color)}
+        <div class="s-body">${p.example}</div>
+      </div>
+    </div>
+
+    <div class="s-block">
+      <div class="note-box">
+        ${label('⚠ Watch out', '#7A6010')}
+        <div class="s-body">${p.watchout}</div>
+      </div>
+    </div>
+
+    <div class="s-block">
+      <div class="connects-box">
+        ${label('→ Connects to the next pillar', '#888')}
+        <div class="s-body" style="color:#555">${p.next}</div>
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
