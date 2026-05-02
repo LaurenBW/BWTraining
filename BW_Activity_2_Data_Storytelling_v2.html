@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 2 — Data Storytelling</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#fff;color:#1a1a1a;padding:28px 22px 56px;max-width:920px;margin:0 auto;font-size:14px}
+  .page-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:#534AB7;margin-bottom:6px}
+  h1{font-size:22px;font-weight:700;margin-bottom:8px}
+  .intro{font-size:13.5px;color:#555;line-height:1.7;margin-bottom:18px;max-width:800px}
+  .case-study-bar{background:#1A1A1A;border-radius:10px;padding:14px 18px;margin-bottom:22px;display:flex;gap:14px;align-items:flex-start}
+  .cs-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#534AB7;white-space:nowrap;margin-top:2px}
+  .cs-text{font-size:13px;color:#fff;line-height:1.6}
+  .cs-text strong{color:#A89FE8}
+  hr.divider{border:none;border-top:1px solid #e8e8e8;margin:24px 0}
+  h2{font-size:16px;font-weight:700;color:#534AB7;margin-bottom:10px}
+  h3{font-size:13px;font-weight:700;color:#1a1a1a;margin:16px 0 8px}
+  .note{font-size:13px;color:#555;line-height:1.65;margin-bottom:14px}
+
+  .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#534AB7;margin:18px 0 8px}
+  .arrow{text-align:center;font-size:20px;color:#534AB7;margin:10px 0}
+
+  .ex-block{background:#EEEDFE;border-radius:10px;padding:16px 20px;margin-bottom:12px}
+  .ex-block h3{color:#534AB7;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .ex-row{display:flex;gap:14px;margin-bottom:8px;font-size:13px;line-height:1.65}
+  .ex-lbl{font-weight:700;color:#534AB7;min-width:130px;flex-shrink:0}
+
+  .narrative-block{background:#f8f8f8;border-radius:10px;padding:16px 20px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#333}
+  .n-label{font-weight:700;color:#534AB7;margin-bottom:5px;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+
+  .meta{display:grid;grid-template-columns:180px 1fr;margin-bottom:6px}
+  .meta .lbl{background:#f0f0f0;padding:9px 12px;font-size:12px;font-weight:600;border:1px solid #ddd;border-right:none;border-radius:6px 0 0 6px;color:#1a1a1a;display:flex;align-items:flex-start}
+  .meta input,.meta textarea{border:1px solid #ddd;border-radius:0 6px 6px 0;padding:8px 10px;font-size:12px;font-family:inherit;resize:vertical}
+  .meta input:focus,.meta textarea:focus{outline:none;border-color:#534AB7}
+
+  .good-note{background:#fafafa;border-left:3px solid #534AB7;padding:12px 16px;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.6;margin-bottom:16px}
+  .good-note strong{color:#534AB7}
+
+  .callout-warn{background:#FFF8E6;border-left:3px solid #E8C84A;border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#5C4800;margin:14px 0}
+  .callout-warn strong{color:#7A6010;display:block;margin-bottom:4px}
+
+  .reflection{background:#f8f8f8;border-radius:12px;padding:18px 22px;margin-top:24px}
+  .reflection h3{color:#534AB7;margin-top:0;margin-bottom:10px}
+  .reflection p{font-size:13px;color:#555;line-height:1.65;margin-bottom:7px}
+</style>
+</head>
+<body>
+
+<div class="page-label">BruntWork · RISE Framework · Activity 2 — Insights</div>
+<h1>Data Storytelling — The 'So What?' Test</h1>
+<p class="intro">Raw data means nothing without context. This activity practises turning data points into a narrative that moves a client conversation forward — using the 'so what?' test on every piece of data before you share it, and building a clear Before / Middle / End story.</p>
+
+<div class="case-study-bar">
+  <div class="cs-label">Case study</div>
+  <div class="cs-text"><strong>Brightside Legal — Month 1 data.</strong> You have your first full month of data and are preparing for the 30-day check-in call with James Wong (Decider). Sarah Chen (Buyer) has been invited but hasn't confirmed attendance. This is your first opportunity to demonstrate value with real numbers.</div>
+</div>
+
+<hr class="divider">
+<h2>Part 1 — Worked Example</h2>
+<p class="note">Below is a complete worked example using Brightside Legal's Month 1 data. Follow each step carefully — the process matters as much as the output.</p>
+
+<div class="step-label">Step 1 — The raw data points</div>
+<div class="ex-block">
+  <div class="ex-row"><span class="ex-lbl">a.</span><span>Staff attendance: 96% average across all three staff in Month 1</span></div>
+  <div class="ex-row"><span class="ex-lbl">b.</span><span>Invoice #1041 is 8 days overdue — first overdue invoice for this client</span></div>
+  <div class="ex-row"><span class="ex-lbl">c.</span><span>Portal logins: 14 in Month 1 (up from 4 in Week 1)</span></div>
+  <div class="ex-row"><span class="ex-lbl">d.</span><span>Gong transcript (Week 6 call, 18:42 mark): James mentioned Sarah is considering hiring a 4th person next quarter</span></div>
+  <div class="ex-row"><span class="ex-lbl">e.</span><span>Priya Nair submitted 3 support queries in Week 1, zero in Weeks 2–4</span></div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step-label">Step 2 — Apply the 'so what?' test to each</div>
+<div class="ex-block">
+  <div class="ex-row"><span class="ex-lbl">a. 96% attendance:</span><span>So what? → The team is settled and engaged — a genuine result for three new hires starting simultaneously. This validates the hire and is exactly the kind of data that moves Sarah from sceptical to confident. Worth naming explicitly on the call.</span></div>
+  <div class="ex-row"><span class="ex-lbl">b. Overdue invoice:</span><span>So what? → First overdue invoice. Not a crisis — but worth raising proactively before it becomes one or before Collections contacts the client directly. This is a relationship conversation, not a collections call. The fact that you're flagging it builds trust rather than eroding it.</span></div>
+  <div class="ex-row"><span class="ex-lbl">c. Portal logins up:</span><span>So what? → The client is becoming more self-sufficient with the platform. Tripling logins in one month means they're engaging with the data — which means they care. This is an adoption signal, not just a usage number.</span></div>
+  <div class="ex-row"><span class="ex-lbl">d. Hiring comment:</span><span>So what? → This is a growth signal — and it's the most commercially important data point in this set. A casual comment from James about what Sarah is thinking is an invitation to open a staffing conversation. It should not be mentioned casually. It should be planned for.</span></div>
+  <div class="ex-row"><span class="ex-lbl">e. Priya's queries:</span><span>So what? → A steep but very short learning curve. Three queries in Week 1, zero since. This tells a story about someone who hit the ground running and figured it out quickly. Worth naming — it says something positive about the quality of the hire and about Priya specifically.</span></div>
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step-label">Step 3 — The narrative (Before / Middle / End)</div>
+<div class="narrative-block">
+  <div class="n-label">BEFORE — where we were</div>
+  <p style="margin-bottom:12px">"When we kicked off six weeks ago, you were onboarding three new team members simultaneously — which is a significant ask. The goal was simple: get great people in, integrated quickly, with minimal disruption to your existing workflow."</p>
+  <div class="n-label">MIDDLE — what happened, and why it matters</div>
+  <p style="margin-bottom:12px">"Month 1 has been genuinely strong. Attendance across all three staff has averaged 96% — which is a real result for three people who all started at once. Priya in particular had a steep learning curve in Week 1 — she submitted three platform queries — but hasn't raised a single issue since. She's operating independently. Your portal usage has also tripled, from 4 logins in your first week to 14 in Month 1 — which tells me you're getting comfortable with the data and the platform. One thing I do want to flag directly: Invoice #1041 from late last month is currently 8 days overdue. I'd rather raise it now than let it sit — can we get that sorted this week?"</p>
+  <div class="n-label">END — what it means and what's next</div>
+  <p>"The early signs are really positive. The team is settled, the data is clean, and you're engaging with the platform. I also noticed in our last call that you mentioned Sarah is thinking about a fourth hire next quarter — I'd love to get ahead of that conversation with you. Sourcing timelines can be longer than people expect, so if that's still on the cards, it might be worth a separate call to talk through what that role would look like."</p>
+</div>
+
+<div class="good-note"><strong>What makes this good:</strong> Every data point has a 'so what?' before it's included. The narrative has a clear arc. The overdue invoice is raised proactively and framed positively. The growth signal is picked up and turned into a next step — not just acknowledged and dropped. The end does not trail off. It closes with a specific ask.</div>
+
+<hr class="divider">
+<h2>Part 2 — Your Data Storytelling Exercise</h2>
+<p class="note">Use the Brightside Legal Month 3 data below, OR choose a real account you are working with. If using the case study, imagine you are preparing for the Week 10 QBR — your first formal business review with the full three-month picture.</p>
+
+<div style="margin-bottom:16px">
+  <div class="meta"><span class="lbl">Account name</span><input type="text" placeholder="Brightside Legal (case study) or your own account"></div>
+  <div class="meta"><span class="lbl">Timeframe</span><input type="text" placeholder="e.g. Months 1–3 / last 30 days"></div>
+  <div class="meta"><span class="lbl">Call this data is for</span><input type="text" placeholder="e.g. Week 10 QBR with Sarah and James"></div>
+</div>
+
+<div class="step-label">Step 1 — List your raw data points (4–6 points)</div>
+<div style="margin-bottom:16px">
+  <div class="meta"><span class="lbl">Data point 1</span><input type="text" placeholder="e.g. Staff attendance avg 96% across Months 1–3"></div>
+  <div class="meta"><span class="lbl">Data point 2</span><input type="text" placeholder=""></div>
+  <div class="meta"><span class="lbl">Data point 3</span><input type="text" placeholder=""></div>
+  <div class="meta"><span class="lbl">Data point 4</span><input type="text" placeholder=""></div>
+  <div class="meta"><span class="lbl">Data point 5</span><input type="text" placeholder=""></div>
+  <div class="meta"><span class="lbl">Data point 6 (optional)</span><input type="text" placeholder=""></div>
+</div>
+
+<div class="step-label">Step 2 — Apply the 'so what?' test to each</div>
+<div style="margin-bottom:16px">
+  <div class="meta"><span class="lbl">Data point 1</span><textarea rows="2" placeholder="What does this mean for this client? What should they think or do differently because of it?"></textarea></div>
+  <div class="meta"><span class="lbl">Data point 2</span><textarea rows="2" placeholder=""></textarea></div>
+  <div class="meta"><span class="lbl">Data point 3</span><textarea rows="2" placeholder=""></textarea></div>
+  <div class="meta"><span class="lbl">Data point 4</span><textarea rows="2" placeholder=""></textarea></div>
+  <div class="meta"><span class="lbl">Data point 5</span><textarea rows="2" placeholder=""></textarea></div>
+  <div class="meta"><span class="lbl">Data point 6</span><textarea rows="2" placeholder="If you can't write a clear 'so what?' — cut this data point."></textarea></div>
+</div>
+
+<div class="step-label">Step 3 — Write your narrative</div>
+<div>
+  <div class="meta"><span class="lbl">BEFORE</span><textarea rows="3" placeholder="Where were things when you started / at your last check-in? Set the context before you share any numbers."></textarea></div>
+  <div class="meta"><span class="lbl">MIDDLE</span><textarea rows="5" placeholder="What happened? What does the data show — and what does it mean? Connect the numbers into a story. Raise anything difficult here, not at the end."></textarea></div>
+  <div class="meta"><span class="lbl">END</span><textarea rows="3" placeholder="What does it all mean? What's the next step or conversation? Always end on a specific action or question — never just a number."></textarea></div>
+</div>
+
+<div class="callout-warn" style="margin-top:16px">
+  <strong>⚠ Before you submit — check these three things</strong>
+  Did you cut any data points that failed the 'so what?' test? Did your narrative end on a clear next step — not just a summary? And did you pick up the growth signal (4th hire mention) and turn it into a conversation, rather than just acknowledging it?
+</div>
+
+<div class="reflection">
+  <h3>Reflection questions</h3>
+  <p>1. Which data point surprised you when you applied the 'so what?' test?</p>
+  <p>2. Were there data points you planned to include but cut after the test? Why were you going to include them?</p>
+  <p>3. Did your narrative reveal a risk or opportunity you hadn't consciously noticed before building it?</p>
+  <p>4. How would you change your approach if Sarah (Buyer) was confirmed on the call, versus if it was James (Decider) only?</p>
+</div>
+
+</body>
+</html>

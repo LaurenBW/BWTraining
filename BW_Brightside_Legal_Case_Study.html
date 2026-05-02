@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brightside Legal — Case Study</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#fff;color:#1a1a1a;padding:24px 20px 56px;max-width:960px;margin:0 auto;font-size:14px}
+  .page-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A9E93;margin-bottom:6px}
+  h1{font-size:26px;font-weight:700;margin-bottom:6px}
+  .subtitle{font-size:14px;color:#888;margin-bottom:20px}
+  .how-to-use{background:#E1F5EE;border-radius:12px;padding:16px 20px;margin-bottom:26px}
+  .how-to-use h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#04342C;margin-bottom:8px}
+  .how-to-use p{font-size:13px;color:#04342C;line-height:1.65;margin-bottom:6px}
+  .how-to-use p:last-child{margin-bottom:0}
+  /* Navigation */
+  .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #e8e8e8}
+  .nav a{text-decoration:none;font-size:12px;font-weight:600;color:#1A9E93;
+    border:1px solid #1A9E93;border-radius:20px;padding:4px 12px;transition:all .15s}
+  .nav a:hover{background:#1A9E93;color:#fff}
+  /* Sections */
+  .section{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid #f0f0f0}
+  .section:last-child{border-bottom:none}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .section-num{width:36px;height:36px;border-radius:8px;background:#1A9E93;
+    color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .section-title{font-size:18px;font-weight:700;color:#1a1a1a}
+  /* Info tables */
+  .info-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:13px}
+  .info-table td{padding:9px 12px;border:1px solid #e8e8e8;vertical-align:top;line-height:1.55}
+  .info-table .lbl{width:200px;font-weight:600;background:#f5f5f5;color:#1a1a1a}
+  .info-table .val{color:#444;background:#fff}
+  /* Data tables */
+  .data-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px}
+  .data-table th{padding:9px 10px;text-align:left;font-weight:600;font-size:11px;color:#fff}
+  .data-table td{padding:9px 10px;border:1px solid #e8e8e8;vertical-align:top;line-height:1.5}
+  .data-table .alt{background:#fafafa}
+  /* Persona cards */
+  .personas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+  @media(max-width:600px){.personas{grid-template-columns:1fr}}
+  .persona-card{border-radius:10px;padding:16px;border:1px solid #e8e8e8}
+  .persona-card .p-name{font-size:14px;font-weight:700;margin-bottom:2px}
+  .persona-card .p-role{font-size:11px;color:#888;margin-bottom:10px}
+  .persona-card .p-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+  .persona-card .p-val{font-size:12px;color:#555;line-height:1.55;margin-bottom:10px}
+  .persona-card .p-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:10px}
+  /* Call log */
+  .call-log{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}
+  .call-log th{padding:9px 10px;text-align:left;font-weight:600;font-size:11px;background:#1a1a1a;color:#fff}
+  .call-log td{padding:10px;border:1px solid #e8e8e8;vertical-align:top;line-height:1.55}
+  .call-log .week{font-weight:700;color:#1a1a1a;background:#f8f8f8;width:70px}
+  .call-log .type{font-style:italic;color:#1A9E93;background:#f8f8f8;width:130px}
+  /* Signal boxes */
+  .signal-box{border-radius:10px;padding:14px 18px;margin:14px 0;font-size:13px;line-height:1.65}
+  .risk-box{background:#FAE8E8;border-left:4px solid #C0392B}
+  .opportunity-box{background:#E1F5EE;border-left:4px solid #1A9E93}
+  .warning-box{background:#FFF8E6;border-left:4px solid #E8C84A;color:#5C4800}
+  .signal-box strong{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+  .risk-box strong{color:#C0392B}
+  .opportunity-box strong{color:#04342C}
+  .warning-box strong{color:#7A6010}
+  /* Activity tags */
+  .activity-tag{display:inline-flex;align-items:center;gap:6px;background:#E1F5EE;
+    border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:#04342C;margin-top:10px}
+  /* Risk/opp tables */
+  .ro-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}
+  .ro-table th{padding:9px 10px;text-align:left;font-weight:600;font-size:11px;color:#fff}
+  .ro-table td{padding:9px 10px;border:1px solid #e8e8e8;vertical-align:top;line-height:1.55}
+  /* Ref table */
+  .ref-table{width:100%;border-collapse:collapse;font-size:12px}
+  .ref-table th{padding:9px 10px;text-align:left;font-weight:600;font-size:11px;background:#1a1a1a;color:#fff}
+  .ref-table td{padding:10px;border:1px solid #e8e8e8;vertical-align:top;line-height:1.55}
+  .ref-table .act-label{font-weight:700;color:#1a1a1a}
+  p.body-text{font-size:13px;color:#555;line-height:1.7;margin-bottom:12px}
+  h3.sub{font-size:14px;font-weight:700;color:#1a1a1a;margin:16px 0 10px}
+</style>
+</head>
+<body>
+
+<div class="page-label">BruntWork · RISE Framework · Case Study</div>
+<h1>Brightside Legal</h1>
+<p class="subtitle">Client Success Case Study — For Training Use Only</p>
+
+<div class="how-to-use">
+  <h3>How to use this document</h3>
+  <p>This case study gives you everything you need to complete all four RISE activities. <strong>Read it in full before starting Activity 1.</strong> You'll refer back to it throughout all four activities — every detail in the worked examples traces directly to information here.</p>
+  <p>Brightside Legal is a fictional client created for training purposes. It is designed to reflect the kinds of situations, stakeholders, and challenges you will encounter in a real BruntWork CSM role.</p>
+</div>
+
+<nav class="nav">
+  <a href="#overview">1. Company Overview</a>
+  <a href="#stakeholders">2. Stakeholders</a>
+  <a href="#data">3. Account Data</a>
+  <a href="#calllog">4. Call Log</a>
+  <a href="#csm">5. Your CSM Context</a>
+  <a href="#risks">6. Risks & Opportunities</a>
+  <a href="#ptft">7. Pt→Ft Conversion</a>
+  <a href="#salary">8. Salary Increase</a>
+  <a href="#guide">9. Activity Guide</a>
+</nav>
+
+<!-- ── SECTION 1 ── -->
+<div class="section" id="overview">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">Company Overview</div>
+  </div>
+
+  <table class="info-table">
+    <tr><td class="lbl">Company name</td><td class="val">Brightside Legal</td></tr>
+    <tr><td class="lbl">Industry</td><td class="val">Legal services — mid-size Australian law firm</td></tr>
+    <tr><td class="lbl">Location</td><td class="val">Melbourne, Victoria, Australia (AU/NZ shift client)</td></tr>
+    <tr><td class="lbl">Size</td><td class="val">22 full-time employees + 3 BruntWork remote staff</td></tr>
+    <tr><td class="lbl">Specialisation</td><td class="val">Commercial law, property conveyancing, wills & estates</td></tr>
+    <tr><td class="lbl">Client since</td><td class="val">10 weeks ago — approaching first QBR</td></tr>
+    <tr><td class="lbl">Contract type</td><td class="val">Part-time (20 hrs/week per staff member) — growth target: full-time</td></tr>
+    <tr><td class="lbl">BruntWork staff</td><td class="val">3: 1 paralegal VA, 1 bookkeeper, 1 admin assistant</td></tr>
+  </table>
+
+  <h3 class="sub">Background</h3>
+  <p class="body-text">Brightside Legal was referred to BruntWork by another Melbourne-based professional services firm. The Managing Partner, Sarah Chen, had been struggling with the cost of growing her in-house team and was looking for a cost-effective way to handle high-volume paralegal and administrative work without adding full-time headcount.</p>
+  <p class="body-text">The firm hired three BruntWork staff simultaneously — an aggressive onboarding approach that created a steep initial learning curve but has largely stabilised. The account was transitioned to you (the CSM) from Sales two weeks after contracts were signed.</p>
+
+  <h3 class="sub">Why this account matters strategically</h3>
+  <ul style="padding-left:20px;font-size:13px;color:#555;line-height:1.8">
+    <li>Part-time contract with 3 staff — strong expansion potential to full-time if value is demonstrated</li>
+    <li>Sarah mentioned a possible 4th hire in a casual Week 6 comment — an unacted growth signal</li>
+    <li>High-growth sector: legal firms in Australia are increasingly outsourcing paralegal work</li>
+    <li>Referral potential: Sarah is well-networked in the Melbourne legal community</li>
+  </ul>
+</div>
+
+<!-- ── SECTION 2 ── -->
+<div class="section" id="stakeholders">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">Key Stakeholders</div>
+  </div>
+  <p class="body-text">Brightside Legal has three main contacts. They have different goals, different communication styles, and need different conversations. Understanding each one is the foundation of Activity 1.</p>
+
+  <div class="personas">
+    <div class="persona-card" style="border-top:3px solid #1A9E93">
+      <div class="p-name">Sarah Chen</div>
+      <div class="p-role">Managing Partner</div>
+      <span class="p-badge" style="background:#E1F5EE;color:#04342C">Buyer</span>
+      <div class="p-label" style="color:#1A9E93">Cares about</div>
+      <div class="p-val">Cost-effectiveness, ROI, financial outcomes. Wants proof the BruntWork model is worth it before committing to expansion.</div>
+      <div class="p-label" style="color:#C0392B">Doesn't want</div>
+      <div class="p-val">Technical details. Operational updates. Being told about features she doesn't use.</div>
+      <div class="p-label">Relationship quality</div>
+      <div class="p-val"><strong>3/5</strong> — responsive but transactional. Hasn't initiated contact. Still testing the partnership.</div>
+    </div>
+
+    <div class="persona-card" style="border-top:3px solid #534AB7">
+      <div class="p-name">James Wong</div>
+      <div class="p-role">Office Manager</div>
+      <span class="p-badge" style="background:#EEEDFE;color:#26215C">Decider</span>
+      <div class="p-label" style="color:#534AB7">Cares about</div>
+      <div class="p-val">Day-to-day efficiency, clear processes, smooth communication with BruntWork staff. Wants predictability — no surprises.</div>
+      <div class="p-label" style="color:#C0392B">Doesn't want</div>
+      <div class="p-val">Admin burden. Strategic conversations that feel irrelevant to his role. Being overwhelmed with reporting.</div>
+      <div class="p-label">Relationship quality</div>
+      <div class="p-val"><strong>4/5</strong> — warm, engaged, attends every call. Your internal champion. Influential without being the formal decision-maker.</div>
+    </div>
+
+    <div class="persona-card" style="border-top:3px solid #BA7517">
+      <div class="p-name">Priya Nair</div>
+      <div class="p-role">Paralegal VA (BruntWork staff)</div>
+      <span class="p-badge" style="background:#FAEEDA;color:#412402">User</span>
+      <div class="p-label" style="color:#BA7517">Cares about</div>
+      <div class="p-val">Clear instructions, practical support, knowing who to contact when something isn't working. Wants to do good work and be recognised for it.</div>
+      <div class="p-label" style="color:#C0392B">Doesn't want</div>
+      <div class="p-val">Being left without answers. Strategy conversations that don't affect her daily work.</div>
+      <div class="p-label">Relationship quality</div>
+      <div class="p-val"><strong>5/5</strong> — confident, hard-working, proactive. James speaks highly of her. If Priya is happy, the account stays stable.</div>
+    </div>
+  </div>
+
+  <div class="activity-tag">⟶ Used in Activity 1 (Stakeholder Map) — map these three into the Buyer / Decider / User framework</div>
+</div>
+
+<!-- ── SECTION 3 ── -->
+<div class="section" id="data">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">Account Data — Months 1 to 3</div>
+  </div>
+  <p class="body-text">This is the data you have available going into the first QBR at Week 10. All of this feeds into Activities 2, 3, and 4.</p>
+
+  <h3 class="sub">Staff attendance</h3>
+  <table class="data-table">
+    <thead><tr style="background:#1A9E93"><th>Staff member</th><th>Month 1</th><th>Month 2</th><th>Month 3</th></tr></thead>
+    <tbody>
+      <tr><td>Priya Nair (Paralegal VA)</td><td>96%</td><td>98%</td><td>100%</td></tr>
+      <tr class="alt"><td>Marcus Obi (Bookkeeper)</td><td>94%</td><td>96%</td><td>94%</td></tr>
+      <tr><td>Lena Park (Admin Assistant)</td><td>98%</td><td>94%</td><td>96%</td></tr>
+      <tr class="alt" style="background:#E1F5EE"><td><strong>Average across all staff</strong></td><td><strong>96%</strong></td><td><strong>96%</strong></td><td><strong>97%</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="body-text">A genuinely strong result. All three staff new and onboarded simultaneously — 96% average over three months validates the hire.</p>
+
+  <h3 class="sub">Client portal usage</h3>
+  <table class="data-table">
+    <thead><tr style="background:#534AB7"><th>Metric</th><th>Week 1</th><th>Month 1</th><th>Month 2</th><th>Month 3</th></tr></thead>
+    <tbody>
+      <tr><td>Portal logins (Sarah / James)</td><td>4</td><td>14</td><td>19</td><td>22</td></tr>
+      <tr class="alt"><td>Invoices viewed</td><td>0</td><td>2</td><td>2</td><td>3</td></tr>
+      <tr><td>Attendance reports viewed</td><td>0</td><td>3</td><td>4</td><td>5</td></tr>
+    </tbody>
+  </table>
+  <p class="body-text">Consistent growth. The client is becoming more self-sufficient — a positive adoption signal. Sarah began logging in from Month 2, suggesting growing engagement.</p>
+
+  <h3 class="sub">Support queries — Priya Nair</h3>
+  <table class="data-table">
+    <thead><tr style="background:#BA7517"><th>Period</th><th>Week 1</th><th>Weeks 2–4</th><th>Month 2</th><th>Month 3</th></tr></thead>
+    <tbody>
+      <tr><td>Support queries submitted</td>
+        <td style="color:#BA7517;font-weight:700">3</td>
+        <td style="color:#166534;font-weight:700">0</td>
+        <td style="color:#166534;font-weight:700">0</td>
+        <td style="color:#166534;font-weight:700">0</td></tr>
+    </tbody>
+  </table>
+  <p class="body-text">3 queries in Week 1 (all platform navigation). Zero since. Steep but short learning curve — she's been operating independently for 9 weeks.</p>
+
+  <h3 class="sub">Invoice history</h3>
+  <table class="data-table">
+    <thead><tr style="background:#C0392B"><th>Invoice</th><th>Amount</th><th>Due date</th><th>Paid</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>#1039 — Month 1 (1st)</td><td>$3,840</td><td>Day 14, Month 1</td><td>Day 14 ✓</td><td>On time</td></tr>
+      <tr style="background:#FFF8E6"><td>#1041 — Month 1 (2nd)</td><td>$1,920</td><td>Day 28, Month 1</td><td>Day 36 ✓</td><td style="color:#7A6010;font-weight:600">8 days overdue — resolved after CSM follow-up call</td></tr>
+      <tr><td>#1044 — Month 2</td><td>$5,760</td><td>Day 14, Month 2</td><td>Day 14 ✓</td><td>On time</td></tr>
+      <tr class="alt"><td>#1047 — Month 3</td><td>$5,760</td><td>Day 14, Month 3</td><td>Day 14 ✓</td><td>On time</td></tr>
+    </tbody>
+  </table>
+  <p class="body-text">One overdue invoice in Month 1 (#1041) — 8 days late. Resolved after a proactive follow-up call. Sarah attributed it to an internal accounts processing delay. No repeat since.</p>
+
+  <div class="activity-tag">⟶ Used in Activity 2 (Data Storytelling) — apply the 'so what?' test to each of these data points</div>
+</div>
+
+<!-- ── SECTION 4 ── -->
+<div class="section" id="calllog">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">Call Log & Key Moments</div>
+  </div>
+  <p class="body-text">These are the key touchpoints from the account's first 10 weeks. Pay close attention to what was said — especially the offhand comments. Those are where your insights live.</p>
+
+  <table class="call-log">
+    <thead><tr><th style="width:70px">Week</th><th style="width:130px">Call type</th><th>Key notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="week">Week 1</td>
+        <td class="type">Onboarding call</td>
+        <td>Sarah and James attended. Sarah arrived 5 minutes late and left exactly on time. James was warm and asked lots of questions. Priya joined briefly to be introduced. Sarah's main concern: <em>"We need the team to be up and running quickly — we can't afford downtime."</em> James agreed to be the day-to-day point of contact. CSM sent summary email within 24 hours.</td>
+      </tr>
+      <tr style="background:#fafafa">
+        <td class="week">Week 2</td>
+        <td class="type">Check-in call</td>
+        <td>James only — Sarah declined. Priya settling in well. James flagged one early process confusion around document formatting but said it was already resolved. Portal walkthrough done. Positive tone overall.</td>
+      </tr>
+      <tr>
+        <td class="week">Week 4</td>
+        <td class="type">Check-in call</td>
+        <td>James and Sarah attended. Sarah briefly asked about <em>"how we track whether the team is actually working."</em> CSM walked her through the portal — attendance data, login times, reports. Sarah seemed reassured. Invoice #1041 flagged as 8 days overdue — Sarah apologised and said accounts would process it that week. Paid 2 days later.</td>
+      </tr>
+      <tr style="background:#fafafa">
+        <td class="week">Week 6</td>
+        <td class="type">Check-in call</td>
+        <td>James only. Priya described by James as <em>"absolutely brilliant — she just gets it."</em> Gong transcript at 18:42: <strong style="color:#BA7517">"Sarah was saying the other day that she might want to take on another person next quarter — I think she's seeing the value."</strong> CSM noted this but did not follow up directly. <em>(This is the unacted growth signal.)</em></td>
+      </tr>
+      <tr>
+        <td class="week">Week 8</td>
+        <td class="type">Email check-in</td>
+        <td>CSM sent monthly alignment email. James replied within the hour: <em>"All good our end — the team has been fantastic."</em> Sarah did not reply. No issues raised by either party.</td>
+      </tr>
+      <tr style="background:#E1F5EE">
+        <td class="week" style="color:#1A9E93">Week 10</td>
+        <td class="type" style="color:#1A9E93;font-weight:700">QBR (upcoming)</td>
+        <td style="color:#04342C;font-weight:600">This is the next scheduled touchpoint — the first formal business review. <strong>This is what Activity 4 is asking you to plan.</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="signal-box warning-box">
+    <strong>⚠ Key signal not yet acted on</strong>
+    James mentioned at Week 6 that Sarah is considering hiring a 4th staff member next quarter. This is a growth signal. It has not been raised directly with Sarah. The QBR at Week 10 is the right moment to advance this conversation — but it needs to be framed as planning ahead for their benefit, not as a sales push.
+  </div>
+
+  <div class="activity-tag">⟶ Used in Activity 4 (QBR Planner) — use this call log to build your before/during/after structure</div>
+</div>
+
+<!-- ── SECTION 5 ── -->
+<div class="section" id="csm">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Your Context as the CSM</div>
+  </div>
+  <p class="body-text">You are the CSM assigned to Brightside Legal. Treat the details below as your own professional context for the activities.</p>
+
+  <table class="info-table" style="margin-bottom:20px">
+    <tr><td class="lbl">Your name (for activities)</td><td class="val">Alex Rivera</td></tr>
+    <tr><td class="lbl">Your shift</td><td class="val">AU/NZ — working Melbourne business hours</td></tr>
+    <tr><td class="lbl">Your CSM Team Lead</td><td class="val">Marielle (AU/NZ shift TL)</td></tr>
+    <tr><td class="lbl">Accounts in your book</td><td class="val">18 accounts</td></tr>
+    <tr><td class="lbl">Time with BruntWork</td><td class="val">7 months</td></tr>
+    <tr><td class="lbl">Brightside Legal account age</td><td class="val">10 weeks — your longest-running current account</td></tr>
+    <tr><td class="lbl">Your department's priority</td><td class="val">Retention — focused on renewals and beginning to identify expansion opportunities</td></tr>
+  </table>
+
+  <h3 class="sub">Your week — time distribution</h3>
+  <p class="body-text">Use this for Activity 3 (Time Audit). This is a rough breakdown of where your time currently goes each week.</p>
+
+  <table class="data-table">
+    <thead><tr style="background:#BA7517"><th style="width:35%">Activity</th><th style="width:15%">Type</th><th style="width:12%">% of week</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Scheduled client check-in calls</td><td style="color:#1A9E93;font-weight:700">Proactive</td><td>15%</td><td>18 accounts, typically bi-weekly</td></tr>
+      <tr class="alt"><td>Support escalations (clients contacting you directly)</td><td style="color:#C0392B;font-weight:700">Reactive</td><td>25%</td><td>High — several clients treat you as first-line support</td></tr>
+      <tr><td>Invoice follow-up & collections coordination</td><td style="color:#C0392B;font-weight:700">Reactive</td><td>10%</td><td>Weekly Finance report requires action on 2–3 accounts</td></tr>
+      <tr class="alt"><td>Account planning, research, Gong review</td><td style="color:#1A9E93;font-weight:700">Proactive</td><td>5%</td><td>Currently underinvested — should be higher</td></tr>
+      <tr><td>Internal Slack / Google Spaces comms</td><td style="color:#C0392B;font-weight:700">Reactive</td><td>20%</td><td>Messages throughout the day — no batching system</td></tr>
+      <tr class="alt"><td>Ad-hoc client requests / unscheduled calls</td><td style="color:#C0392B;font-weight:700">Reactive</td><td>15%</td><td>Clients booking time directly, often for support issues</td></tr>
+      <tr><td>HubSpot admin, reporting, logging</td><td style="color:#C0392B;font-weight:700">Reactive</td><td>10%</td><td>Done at end of day, often rushed</td></tr>
+    </tbody>
+  </table>
+
+  <div class="activity-tag">⟶ Used in Activity 3 (Time Audit) — use this as the starting point for your time audit and RISE account plan</div>
+</div>
+
+<!-- ── SECTION 6 ── -->
+<div class="section" id="risks">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">Risks & Opportunities</div>
+  </div>
+
+  <h3 class="sub">Current risks</h3>
+  <table class="ro-table" style="margin-bottom:20px">
+    <thead><tr style="background:#C0392B"><th style="width:24%">Risk</th><th style="width:38%">Signal</th><th style="width:38%">Recommended action</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:#C0392B">Sarah (Buyer) relationship is thin</td><td>She hasn't initiated contact. Responds but doesn't engage. Still testing whether BruntWork delivers value.</td><td>Secure 1:1 time with Sarah at the QBR. Lead with ROI data — attendance, portal usage, cost comparison. Make her feel seen, not managed.</td></tr>
+      <tr class="alt"><td style="font-weight:600;color:#C0392B">Part-time contract vulnerable at renewal</td><td>Part-time clients are easier to cancel. If Sarah doesn't see clear value, she may reduce scope rather than expand.</td><td>Build the value case now. Use data. Plant the expansion conversation. Make cancellation feel like a step backwards.</td></tr>
+      <tr><td style="font-weight:600;color:#C0392B">Growth signal not yet acted on</td><td>James mentioned Sarah considering a 4th hire in Week 6. Six weeks later — still unaddressed.</td><td>Raise at the QBR. Frame as planning ahead: <em>"I want to make sure we're ahead of the sourcing timeline if you decide to go ahead."</em></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">Current opportunities</h3>
+  <table class="ro-table">
+    <thead><tr style="background:#1A9E93"><th style="width:24%">Opportunity</th><th style="width:38%">Evidence</th><th style="width:38%">Recommended action</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:#1A9E93">Part-time → full-time conversion</td><td>3 staff at 20 hrs/week. Converting to full-time (38 hrs/week) nearly doubles the account FTE value.</td><td>Use the QBR to demonstrate value, then: <em>"Many clients find full-time makes more commercial sense once the team is performing well. Worth exploring?"</em></td></tr>
+      <tr class="alt"><td style="font-weight:600;color:#1A9E93">4th staff member (new hire)</td><td>James confirmed Sarah is considering it. She's already thinking about it — you just need to activate the conversation.</td><td>ROI framing: <em>"Based on workload data and performance, this might be a good time to scope a fourth role before demand peaks."</em></td></tr>
+      <tr><td style="font-weight:600;color:#1A9E93">Referral potential</td><td>Sarah is well-networked in Melbourne's legal community. A happy client = a referral engine.</td><td>Don't rush this. Build the relationship first. Introduce the referral conversation naturally at 6 months.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── SECTION 7 — PT TO FT ── -->
+<div class="section" id="ptft">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">Growth Scenario — Part-time to Full-time Conversion</div>
+  </div>
+  <p class="body-text">This section provides the context you need to plan the part-time to full-time conversion conversation in Activity 3. Read it before completing Part 4 of that activity.</p>
+
+  <h3 class="sub">Current contract structure</h3>
+  <table class="info-table" style="margin-bottom:20px">
+    <tr><td class="lbl">Current arrangement</td><td class="val">3 BruntWork staff on part-time contracts — 20 hours per week each</td></tr>
+    <tr><td class="lbl">Staff members</td><td class="val">Priya Nair (paralegal VA), Marcus Obi (bookkeeper), Lena Park (admin assistant)</td></tr>
+    <tr><td class="lbl">Full-time equivalent</td><td class="val">38 hours per week — converting all three would nearly double the account's total contracted hours</td></tr>
+    <tr><td class="lbl">Account age at Week 10</td><td class="val">10 weeks — approaching the point where the team is settled enough for this conversation</td></tr>
+  </table>
+
+  <h3 class="sub">Conditions that make the timing right</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+    <div style="background:#E1F5EE;border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#1A9E93;margin-bottom:6px">✓ Team is settled</div>
+      <div style="font-size:12px;color:#555;line-height:1.55">96%+ attendance across all three months. Priya operating independently since Week 2. No staff complaints or issues raised.</div>
+    </div>
+    <div style="background:#E1F5EE;border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#1A9E93;margin-bottom:6px">✓ Value is demonstrated</div>
+      <div style="font-size:12px;color:#555;line-height:1.55">Three months of clean performance data. Portal usage tripling. Client actively engaging with the platform and the relationship.</div>
+    </div>
+    <div style="background:#E1F5EE;border-radius:10px;padding:14px">
+      <div style="font-size:12px;font-weight:700;color:#1A9E93;margin-bottom:6px">✓ Client in growth mode</div>
+      <div style="font-size:12px;color:#555;line-height:1.55">Sarah is already considering a 4th hire. She is not in contraction mode — she is in expansion mode. This is the right climate for the conversation.</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Why this is the single biggest FTE opportunity on this account</h3>
+  <p class="body-text">Converting three part-time staff (20 hrs/week each = 60 total contracted hours) to full-time (38 hrs/week each = 114 total contracted hours) nearly doubles the account's contracted value without any new sourcing, onboarding, or relationship-building required. The team is already performing. The client already trusts the model. The only thing missing is the conversation.</p>
+  <p class="body-text">This is also the best moment to have it — before renewal, when the performance data is fresh and the client is already thinking about growth. Waiting until after renewal makes it feel like an upsell. Raising it now makes it feel like strategic advice.</p>
+
+  <h3 class="sub">Framing guidance — value-first, not sales-first</h3>
+  <div style="background:#FAEEDA;border-radius:10px;padding:16px 18px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#BA7517;margin-bottom:8px">Suggested approach for Alex at the Week 10 QBR</div>
+    <p style="font-size:13px;color:#412402;line-height:1.7;margin-bottom:8px">"The team has been performing really well over the past three months — 96% attendance, platform adoption growing consistently. Many of our clients find that once the team is settled and delivering at this level, full-time makes more commercial sense than part-time — you get the full benefit of the relationship without the limitations of the hours cap, and it's usually more cost-effective per hour at full-time rates. Is that something worth exploring for any of the three roles?"</p>
+    <p style="font-size:12px;color:#7A6010"><strong>When to raise it:</strong> In the "After" section of the Before/During/After QBR structure — after the performance data has been presented, when you're talking about what the next quarter looks like. Not at the start (too transactional) and not at the very end (too rushed).</p>
+  </div>
+
+  <h3 class="sub">Objections to prepare for</h3>
+  <table class="ro-table">
+    <thead><tr style="background:#BA7517"><th style="width:32%">Objection</th><th style="width:38%">Prepared response</th><th style="width:30%">Tone</th></tr></thead>
+    <tbody>
+      <tr><td>"We didn't budget for that this quarter."</td><td>"Completely understand — it doesn't need to happen immediately. It might be worth flagging to your finance team as something to factor into next quarter's planning, especially given the performance data we've just reviewed."</td><td>Empathetic, practical, no pressure</td></tr>
+      <tr class="alt"><td>"Let's see how the next few months go first."</td><td>"That's a fair approach. What would you need to see over the next 60 days that would make you feel confident about making that call?"</td><td>Warm, turns it into a goalpost conversation</td></tr>
+      <tr><td>"What's the difference in cost?"</td><td>"I can get you a clear breakdown from our Finance team — I'll include it in the follow-up email after today's call."</td><td>Transparent, commits to a next action</td></tr>
+    </tbody>
+  </table>
+  <div class="activity-tag" style="margin-top:10px">⟶ Used in Activity 3 (Part 4 — Growth Conversation Planner)</div>
+</div>
+
+<!-- ── SECTION 8 — SALARY INCREASE ── -->
+<div class="section" id="salary">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">Difficult Conversation — Annual 5% Salary Increase</div>
+  </div>
+  <p class="body-text">This section provides the context you need to plan the annual salary increase notification in Activity 4. Read it before completing Part 3 of that activity.</p>
+
+  <h3 class="sub">The situation</h3>
+  <table class="info-table" style="margin-bottom:20px">
+    <tr><td class="lbl">Contract clause</td><td class="val">All BruntWork remote staff receive a 5% salary increase at their 12-month anniversary — a standard term in all BruntWork contracts</td></tr>
+    <tr><td class="lbl">When it applies</td><td class="val">Priya, Marcus, and Lena all started simultaneously. Their 12-month mark falls approximately 2 months after the Week 10 QBR</td></tr>
+    <tr><td class="lbl">Notification timeline</td><td class="val">Alex must notify Sarah one month before the increase takes effect — so the notification falls roughly one month after the QBR</td></tr>
+    <tr><td class="lbl">Relationship context</td><td class="val">By notification time, the relationship with Sarah should be at Level 2 (post-QBR progress) but is not yet solidified. This conversation will test the quality of the relationship Alex has built</td></tr>
+  </table>
+
+  <h3 class="sub">Why this clause exists — understand it before you call</h3>
+  <div style="background:#E1F5EE;border-radius:10px;padding:16px 18px;margin-bottom:20px">
+    <p style="font-size:13px;color:#04342C;line-height:1.7;margin-bottom:8px">The annual 5% increase is not a revenue mechanism — it is a staff retention mechanism. A BruntWork remote employee who does not receive a market-rate annual review will look for other opportunities. If a client's best-performing staff member leaves because BruntWork has not kept pace with the market, the client has a significantly larger problem than a 5% cost adjustment.</p>
+    <p style="font-size:13px;color:#04342C;line-height:1.7;margin:0">Framing it this way — because it is genuinely true — changes the entire tone of the conversation. You are not delivering a price increase. You are protecting the quality of the team your client has already invested time and trust in building.</p>
+  </div>
+
+  <h3 class="sub">The process — what must happen</h3>
+  <table class="info-table" style="margin-bottom:20px">
+    <tr><td class="lbl">Step 1</td><td class="val">Notify the client verbally (call or email) one month before the effective date. Do not send the written confirmation first — the conversation comes before the paperwork.</td></tr>
+    <tr><td class="lbl">Step 2</td><td class="val">Confirm in writing the same day as the verbal notification. Copy Finance.</td></tr>
+    <tr><td class="lbl">Step 3</td><td class="val">Update HubSpot with the new rate and the confirmed effective date.</td></tr>
+    <tr><td class="lbl">If escalation needed</td><td class="val">You cannot negotiate the rate or agree to a waiver. If a client pushes back beyond your prepared responses, escalate to your Team Lead immediately. Never agree to reduce or waive the increase without explicit TL and Finance sign-off.</td></tr>
+  </table>
+
+  <h3 class="sub">Likely objections for Brightside Legal specifically</h3>
+  <p class="body-text" style="margin-bottom:10px">Sarah is a Managing Partner who is financially careful and has not yet fully committed to the partnership. These are the objections Alex is most likely to face:</p>
+  <table class="ro-table">
+    <thead><tr style="background:#C0392B"><th style="width:32%">Objection</th><th style="width:38%">Prepared response</th><th style="width:30%">What not to do</th></tr></thead>
+    <tbody>
+      <tr><td>"We didn't budget for this."</td><td>"I understand — that's exactly why I'm flagging it a month ahead. You have time to factor it into the current cycle. Would it help if I sent a breakdown of the cost impact so you can share it with your accounts team?"</td><td>Don't apologise for the clause. Don't offer to "look into" waiving it.</td></tr>
+      <tr class="alt"><td>"The staff haven't performed well enough to justify it."</td><td>"That's worth discussing seriously — can you tell me more about what you've observed? I want to make sure we address any concerns properly. The increase itself is a contractual term, but any performance issues absolutely need to be worked through — and I'd like to start that conversation now."</td><td>Don't link the increase to performance. Don't get defensive. Separate the two issues.</td></tr>
+      <tr><td>"Can we skip it this year?"</td><td>"The increase is a standard contract term, so I'm not able to waive it — but if you'd like to discuss it further, I'm happy to set up a call with my team lead. What I can tell you is that this is what keeps the team stable. Losing Priya, for example, would cost significantly more to resolve than the annual adjustment."</td><td>Don't agree to skip it. Don't make promises above your authority.</td></tr>
+      <tr class="alt"><td>"This is more than we expected."</td><td>"Let me make sure you have the exact figures — I'll send a clear breakdown after this call. And this might also be a good moment to revisit whether the current part-time structure is still the right fit, or whether full-time might actually be more cost-effective for how you're using the team."</td><td>Don't hedge on the amount. Use it as a strategic moment to open the pt→ft conversation.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:#FFF8E6;border-left:3px solid #E8C84A;border-radius:0 10px 10px 0;padding:14px 18px;margin-top:14px;font-size:13px;color:#5C4800">
+    <strong style="display:block;color:#7A6010;margin-bottom:5px">⚠ Critical boundary — do not cross this</strong>
+    You cannot negotiate the salary increase rate. You cannot agree to waive or defer it without explicit sign-off from your Team Lead and Finance. If a client is pushing for this, your response is: "I understand your position — let me set up a call with my team lead so we can discuss it properly." Then escalate immediately. Do not try to handle this alone.
+  </div>
+  <div class="activity-tag" style="margin-top:12px">⟶ Used in Activity 4 (Part 3 — Difficult Conversation Planner)</div>
+</div>
+
+<!-- ── SECTION 9 — ACTIVITY GUIDE ── -->
+<div class="section" id="guide">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">Activity Reference Guide</div>
+  </div>
+  <p class="body-text">Use this table to find which sections of the case study feed into each activity.</p>
+
+  <table class="ref-table">
+    <thead><tr><th style="width:28%">Activity</th><th style="width:22%">Sections to read</th><th>What you're doing</th></tr></thead>
+    <tbody>
+      <tr><td class="act-label">Activity 1 — Stakeholder Map</td><td>Sections 2 + 5</td><td>Map Sarah, James, Priya, and Marcus into the Buyer / Decider / User framework. Define relationship level and one next action per stakeholder. Apply the quiet client lens to Sarah.</td></tr>
+      <tr class="alt"><td class="act-label">Activity 2 — Data Storytelling</td><td>Sections 3 + 4</td><td>Take the Month 1 data from Section 3. Apply the 'so what?' test. Build a Before / Middle / End narrative for the 30-day check-in. Pick up the growth signal from the call log.</td></tr>
+      <tr><td class="act-label">Activity 3 — Time Audit + Account Plan</td><td>Sections 5 + 6 + 7</td><td>Time audit from Section 5. RISE account plan from Sections 2–6. Part-time to full-time conversion plan from Section 7.</td></tr>
+      <tr class="alt"><td class="act-label">Activity 4 — QBR Planner + Difficult Conversations</td><td>All sections + 8</td><td>Full QBR plan using all sections. Annual 5% salary increase conversation from Section 8.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
